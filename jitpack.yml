@@ -2,4 +2,4 @@ jdk:
   - openjdk17
 
 install:
-  - ./gradlew clean assemble -Pkotlin.js.skipNpmInstall=true -Pkotlin.js.generateYarnLock=false
+  - ./gradlew clean assemble -PskipJsBuild=true

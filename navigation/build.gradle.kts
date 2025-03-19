@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 tasks.matching { it.name == "kotlinNpmInstall" }.configureEach { enabled = false }
+val isRunningOnJitPack = System.getenv("JITPACK") == "true"
+
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -13,8 +15,11 @@ version = "1.0.0"
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
+    if (!isRunningOnJitPack) {
+        wasmJs {
+            browser()
+            binaries.library()
+        }
     }
 
     sourceSets {
