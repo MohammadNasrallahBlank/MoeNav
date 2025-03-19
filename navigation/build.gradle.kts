@@ -15,7 +15,9 @@ version = "1.0.0"
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
-    if (!isRunningOnJitPack) {
+    if (isRunningOnJitPack) {
+        jvm()
+    } else {
         wasmJs {
             browser()
             binaries.library()
