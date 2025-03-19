@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+tasks.matching { it.name == "kotlinNpmInstall" }.configureEach { enabled = false }
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
