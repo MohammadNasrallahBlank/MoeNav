@@ -38,22 +38,51 @@ dependencies {
 ---
 
 ## 🔧 How to Use
-### Step 1: Setup `NavHost`
-Define a **NavHost** and specify your start destination:
+
+### Step 1: Setup `NavController`
+Define a **NavController** and specify your routes and start destination, pass the navController as needed:
 ```kotlin
-@Composable
-fun App(navController: MoeNavController<SampleRoutes>) {
-    NavHost(navController = navController, startDestination = "/") {
-        composable("/") { HomeScreen(navController) }
-        composable("/profile") { ProfileScreen(navController) }
-        composable("/about") { AboutScreen(navController) }
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() {
+
+    val navController = MoeNavController.createWithBrowserHistory(
+        routes = SampleRoutes.routes,
+        startDestination = SampleRoutes.About
+    )
+
+    val body: HTMLElement = document.body ?: return
+
+    ComposeViewport(body) {
+        App(navController)
     }
 }
 ```
 
 ---
 
-### Step 2: Navigate Between Screens
+### Step 2: Setup `NavHost`
+Define a **NavHost** and specify your start destination:
+```kotlin
+@Composable
+fun App(navController: MoeNavController<SampleRoutes>) {
+    NavHost(navController = navController) {
+        composable("/") { HomeScreen(navController) }
+        composable("/about") { AboutScreen(navController) }
+        composable("/user/{userId}") { params ->
+            val userId = params?.get("userId").orEmpty()
+            UserScreen(navController, userId)
+        }
+        navigation(route = "/profile", startDestination = "/profile/main") {
+            composable("/profile/main") { ProfileMainScreen(navController) }
+            composable("/profile/details") { ProfileDetailsScreen(navController) }
+        }
+    }
+}
+```
+
+---
+
+### Step 3: Navigate Between Screens
 Use `navController.navigate(route)` to switch between pages:
 ```kotlin
 @Composable
@@ -69,7 +98,7 @@ fun HomeScreen(navController: MoeNavController<SampleRoutes>) {
 
 ---
 
-### Step 3: Dynamic Parameters
+### Step 4: Dynamic Parameters
 Routes can include **path parameters**:
 ```kotlin
 NavHost(navController = navController, startDestination = "/") {
@@ -86,7 +115,7 @@ navController.navigate("/user/123")
 
 ---
 
-### Step 4: Nested Navigation Graphs
+### Step 5: Nested Navigation Graphs
 Define **sub-graphs** for better organization:
 ```kotlin
 NavHost(navController = navController, startDestination = "/") {
