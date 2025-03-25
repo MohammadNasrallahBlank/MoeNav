@@ -16,7 +16,7 @@ signing {
 }
 
 group = "com.blank.moenav"
-version = "1.1.0"
+version = "1.1.1"
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
@@ -48,7 +48,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.blankonline.moe",
         artifactId = "MoeNav",
-        version = "1.1.0"
+        version = "1.1.1"
     )
 
     pom {
