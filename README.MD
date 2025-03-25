@@ -18,7 +18,7 @@ dependencyResolutionManagement {
 2. **Add the dependency to your `build.gradle.kts`**
 ```kotlin
 dependencies {
-    implementation("com.blank.moenav:MoeNav:1.0.6")
+    implementation("com.blank.moenav:MoeNav:<version>")
 }
 ```
 
@@ -31,7 +31,7 @@ dependencies {
 ✅ **Browser History Support** → `Back`/`Forward` buttons work as expected.  
 ✅ **Deep Linking** → Load specific pages directly via URL.  
 ✅ **Dynamic Parameters** → Pass values via URL (`/user/{id}`).  
-✅ **OnDestinationChanged Listener** → Get notified when navigation changes.  
+✅ **OnDestinationChanged Listener** → Get notified when navigation changes.
 
 📌 **⚠️ This library is WASM-only. It does not work on JVM or Android.**
 
@@ -68,14 +68,6 @@ fun App(navController: MoeNavController<SampleRoutes>) {
     NavHost(navController = navController) {
         composable("/") { HomeScreen(navController) }
         composable("/about") { AboutScreen(navController) }
-        composable("/user/{userId}") { params ->
-            val userId = params?.get("userId").orEmpty()
-            UserScreen(navController, userId)
-        }
-        navigation(route = "/profile", startDestination = "/profile/main") {
-            composable("/profile/main") { ProfileMainScreen(navController) }
-            composable("/profile/details") { ProfileDetailsScreen(navController) }
-        }
     }
 }
 ```
@@ -101,7 +93,7 @@ fun HomeScreen(navController: MoeNavController<SampleRoutes>) {
 ### Step 4: Dynamic Parameters
 Routes can include **path parameters**:
 ```kotlin
-NavHost(navController = navController, startDestination = "/") {
+NavHost(navController = navController) {
     composable("/user/{userId}") { params ->
         val userId = params["userId"] ?: "Unknown"
         UserScreen(navController, userId)
@@ -118,7 +110,7 @@ navController.navigate("/user/123")
 ### Step 5: Nested Navigation Graphs
 Define **sub-graphs** for better organization:
 ```kotlin
-NavHost(navController = navController, startDestination = "/") {
+NavHost(navController = navController) {
     composable("/loading") { LoadingScreen(navController) }
 
     navigation(route = "/auth", startDestination = "/auth/login") {
