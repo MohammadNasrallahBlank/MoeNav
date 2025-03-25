@@ -49,17 +49,29 @@ class MoeNavController<T : WebRoute>(
     companion object {
         fun <T : WebRoute> createWithBrowserHistory(
             routes: List<(String) -> T?>,
-            fallbackRoute: T
+            startDestination: T
         ): MoeNavController<T> {
             val routeMatcher = RouteMatcher(routes)
             val currentPath = window.location.pathname
-            val initialRoute = routeMatcher.match(currentPath) ?: fallbackRoute
+            val initialRoute = if (currentPath == "/") {
+                startDestination
+            } else {
+                routeMatcher.match(currentPath) ?: startDestination
+            }
+
             val navController = MoeNavController(initialRoute, routeMatcher)
             val historyManager = BrowserHistoryManager()
             navController.attachHistoryManager(historyManager)
+
+            // ✅ Push startDestination to browser if it was just `/`
+            if (currentPath == "/") {
+                historyManager.pushState(startDestination.buildUrl())
+            }
+
             return navController
         }
     }
+
 }
 
 

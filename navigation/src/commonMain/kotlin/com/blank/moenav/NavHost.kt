@@ -6,14 +6,14 @@ import androidx.compose.runtime.getValue
 @Composable
 fun <T : WebRoute> NavHost(
     navController: MoeNavController<T>,
-    startDestination: String,
     builder: NavGraphBuilder.() -> Unit
 ) {
-    val graph = NavGraphBuilder(startDestination = startDestination).apply(builder)
+    val graph = NavGraphBuilder().apply(builder)
     val currentRoute by navController.currentRoute
 
     RenderDestination(navController, currentRoute.path, graph.destinations)
 }
+
 
 @Composable
 private fun <T : WebRoute> RenderDestination(

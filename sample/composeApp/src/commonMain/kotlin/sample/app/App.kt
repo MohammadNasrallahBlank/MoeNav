@@ -16,7 +16,7 @@ import com.blank.moenav.NavHost
 
 @Composable
 fun App(navController: MoeNavController<SampleRoutes>) {
-    NavHost(navController = navController, startDestination = "/") {
+    NavHost(navController = navController) {
         composable("/") { HomeScreen(navController) }
         composable("/about") { AboutScreen(navController) }
         composable("/user/{userId}") { params ->

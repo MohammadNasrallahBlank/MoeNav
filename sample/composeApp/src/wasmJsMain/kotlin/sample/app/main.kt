@@ -11,7 +11,7 @@ fun main() {
 
     val navController = MoeNavController.createWithBrowserHistory(
         routes = SampleRoutes.routes,
-        fallbackRoute = SampleRoutes.Home
+        startDestination = SampleRoutes.About
     )
 
     val body: HTMLElement = document.body ?: return
