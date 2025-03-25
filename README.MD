@@ -146,3 +146,7 @@ A **modern, flexible, and developer-friendly navigation solution** for **Compose
 ### 🔹 What Changed in This Version?
 ✅ **Updated installation to use Maven Central instead of JitPack.**  
 ✅ **Clearly stated that MoeNav is for WASM and does not support JVM or Android.**  
+
+## 🙌 Credits
+
+Built with ❤️ by [Mohamad](https://github.com/MohammadNasrallahBlank)
