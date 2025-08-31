@@ -1,7 +1,7 @@
-## 🛠️ MoeNav - A Navigation Library for Compose Web (WASM)
+## 🛠️ MoeNav - A Navigation Library for Compose Web (WASM) and JVM (Desktop)
 **MoeNav** is a **lightweight, flexible, and powerful** navigation library designed **exclusively for Jetpack Compose for Web (WASM)**. Inspired by **Android's Navigation Component**, it provides **NavHost**, **NavController**, and **nested navigation graphs**, solving issues related to **URLs, browser history, and deep linking**.
 
-🚀 **Optimized for Kotlin Multiplatform (WASM) — Not for JVM or Android.**
+🚀 **Optimized for Kotlin Multiplatform (WASM) and JVM not for Android.**
 
 ---
 
@@ -53,6 +53,22 @@ fun main() {
     val body: HTMLElement = document.body ?: return
 
     ComposeViewport(body) {
+        App(navController)
+    }
+}
+```
+or for JVM Desktop
+```kotlin
+fun main() = application {
+    val navController = MoeNavController.createWithHistory(
+        routes = SampleRoutes.routes,
+        startDestination = SampleRoutes.Home
+    )
+
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "MoeNav Sample"
+    ) {
         App(navController)
     }
 }
