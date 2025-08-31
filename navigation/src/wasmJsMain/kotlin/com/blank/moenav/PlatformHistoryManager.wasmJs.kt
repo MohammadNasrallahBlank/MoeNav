@@ -2,26 +2,27 @@ package com.blank.moenav
 
 import kotlinx.browser.window
 
-class BrowserHistoryManager {
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class PlatformHistoryManager actual constructor(){
 
     private var urlChangeListener: ((String) -> Unit)? = null
 
-    fun setOnUrlChangeListener(listener: (String) -> Unit) {
+    actual fun setOnUrlChangeListener(listener: (String) -> Unit) {
         urlChangeListener = listener
         window.onpopstate = {
             urlChangeListener?.invoke(currentPath())
         }
     }
 
-    fun pushState(url: String) {
+    actual fun pushState(url: String) {
         window.history.pushState(null, "", url)
     }
 
-    fun navigateBack() {
+    actual fun navigateBack() {
         window.history.back()
     }
 
-    private fun currentPath(): String {
+    actual fun currentPath(): String {
         return window.location.pathname
     }
 }

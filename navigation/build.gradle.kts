@@ -24,6 +24,7 @@ kotlin {
         browser()
         binaries.library()
     }
+    jvm()
 
     sourceSets {
         commonMain.dependencies {
@@ -89,3 +90,4 @@ mavenPublishing {
 
     signAllPublications()
 }
+//@Gemini this is my gradle. something needs to happen here ?

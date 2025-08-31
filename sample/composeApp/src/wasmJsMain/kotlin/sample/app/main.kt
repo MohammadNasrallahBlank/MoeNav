@@ -9,7 +9,7 @@ import sample.app.SampleRoutes
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
-    val navController = MoeNavController.createWithBrowserHistory(
+    val navController = MoeNavController.createWithHistory(
         routes = SampleRoutes.routes,
         startDestination = SampleRoutes.Home
     )
