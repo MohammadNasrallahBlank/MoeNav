@@ -33,7 +33,7 @@ dependencies {
 ✅ **Dynamic Parameters** → Pass values via URL (`/user/{id}`).  
 ✅ **OnDestinationChanged Listener** → Get notified when navigation changes.
 
-📌 **⚠️ This library is WASM-only. It does not work on JVM or Android.**
+📌 **⚠️ This library is WASM and JVM Desktop, it does not work for Android.**
 
 ---
 
